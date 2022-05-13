@@ -27,6 +27,23 @@ while len(guessed_states) < 50:
 
     print(answer_state)
 
+    # Creamos la salida del juego.
+    # Creamos una lista con los "states"
+    # que ni fueron adivinados
+    if answer_state == "Exit":
+        unguessed = []
+        for ung in all_states:
+            if ung not in guessed_states:
+                unguessed.append(ung)
+        
+        # Pasar lista a CSV: 
+        # 1.- Pasar lista ("unguessed"), a DataFrame 
+        # 2.- Pasar DataFrame a CSV ".to_csv"
+        # 3.- Nombre del CSV entre paréntesis
+        unguessed_data = pandas.DataFrame(unguessed)
+        unguessed_data.to_csv("Faltantes.csv")
+        break
+
     if answer_state in all_states:
         # Agregamos a guessed_states
         guessed_states.append(answer_state)
@@ -45,7 +62,8 @@ while len(guessed_states) < 50:
         # Hacemos que la tortuga imprima el nombre adivinado
         t.write(answer_state)
 
-screen.exitonclick()
+# Se quita esta línea para funcionalidad de "Exit"
+# screen.exitonclick()
 #______Fin Manejo de mapa con "Turtle"________#
 
 # R E G I S T R A N D O    C L I C K S
